@@ -2,35 +2,42 @@ package ru.nvgrig.manager.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import ru.nvgrig.manager.controller.payload.NewProductPayload;
+import org.springframework.web.bind.annotation.*;
+import ru.nvgrig.manager.controller.payload.UpdateProductPayload;
 import ru.nvgrig.manager.entity.Product;
 import ru.nvgrig.manager.service.ProductService;
 
 @Controller
+@RequestMapping("catalogue/products/{productId:\\d+}")
 @RequiredArgsConstructor
-@RequestMapping("catalogue/products")
 public class ProductController {
 
     private final ProductService productService;
 
-    @GetMapping(value = "list")
-    public String getProductList(Model model) {
-        model.addAttribute("products", productService.findAllProducts());
-        return "catalogue/products/list";
+    @ModelAttribute("product")
+    public Product product(@PathVariable("productId") int productId) {
+        return productService.findProduct(productId).orElseThrow();
     }
 
-    @GetMapping("create")
-    public String getNewProduct() {
-        return "catalogue/products/new_product";
+    @GetMapping
+    public String getProduct() {
+        return "catalogue/products/product";
     }
 
-    @PostMapping("create")
-    public String createProduct(NewProductPayload payload) {
-        Product product = productService.createProduct(payload.title(), payload.details());
+    @GetMapping("edit")
+    public String getProductEditPage() {
+        return "catalogue/products/edit";
+    }
+
+    @PostMapping("edit")
+    public String updateProduct(@ModelAttribute("product") Product product, UpdateProductPayload payload) {
+        productService.updateProduct(product.getId(), payload.title(), payload.details());
+        return "redirect:/catalogue/products/%d".formatted(product.getId());
+    }
+
+    @PostMapping("delete")
+    public String deleteProduct(@ModelAttribute("product") Product product) {
+        productService.deleteProduct(product.getId());
         return "redirect:/catalogue/products/list";
     }
 

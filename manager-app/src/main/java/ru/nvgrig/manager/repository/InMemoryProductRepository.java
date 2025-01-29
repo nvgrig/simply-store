@@ -3,11 +3,7 @@ package ru.nvgrig.manager.repository;
 import org.springframework.stereotype.Repository;
 import ru.nvgrig.manager.entity.Product;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.stream.IntStream;
+import java.util.*;
 
 @Repository
 public class InMemoryProductRepository implements ProductRepository {
@@ -27,6 +23,18 @@ public class InMemoryProductRepository implements ProductRepository {
                 .orElse(0) + 1);
         products.add(product);
         return product;
+    }
+
+    @Override
+    public Optional<Product> findById(Integer productId) {
+        return products.stream()
+                .filter(product -> Objects.equals(product.getId(), productId))
+                .findFirst();
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+        products.removeIf(product -> Objects.equals(product.getId(), id));
     }
 
 }
