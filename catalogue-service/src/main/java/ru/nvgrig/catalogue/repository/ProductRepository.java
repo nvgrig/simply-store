@@ -1,6 +1,6 @@
-package ru.nvgrig.manager.repository;
+package ru.nvgrig.catalogue.repository;
 
-import ru.nvgrig.manager.entity.Product;
+import ru.nvgrig.catalogue.entity.Product;
 
 import java.util.List;
 import java.util.Optional;

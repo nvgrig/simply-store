@@ -1,9 +1,9 @@
-package ru.nvgrig.manager.service;
+package ru.nvgrig.catalogue.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.nvgrig.manager.entity.Product;
-import ru.nvgrig.manager.repository.ProductRepository;
+import ru.nvgrig.catalogue.entity.Product;
+import ru.nvgrig.catalogue.repository.ProductRepository;
 
 import java.util.List;
 import java.util.NoSuchElementException;
