@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import ru.nvgrig.catalogue.entity.Product;
 import ru.nvgrig.catalogue.repository.ProductRepository;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -16,7 +15,7 @@ public class DefaultProductService implements ProductService {
     private final ProductRepository productRepository;
 
     @Override
-    public List<Product> findAllProducts() {
+    public Iterable<Product> findAllProducts() {
         return productRepository.findAll();
     }
 

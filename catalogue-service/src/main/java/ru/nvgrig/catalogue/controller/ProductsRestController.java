@@ -11,7 +11,6 @@ import ru.nvgrig.catalogue.controller.payload.NewProductPayload;
 import ru.nvgrig.catalogue.entity.Product;
 import ru.nvgrig.catalogue.service.ProductService;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -22,7 +21,7 @@ public class ProductsRestController {
     private final ProductService productService;
 
     @GetMapping
-    public List<Product> findProducts() {
+    public Iterable<Product> findProducts() {
         return productService.findAllProducts();
     }
 
