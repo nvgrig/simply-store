@@ -16,8 +16,12 @@ public class DefaultProductService implements ProductService {
     private final ProductRepository productRepository;
 
     @Override
-    public Iterable<Product> findAllProducts() {
-        return productRepository.findAll();
+    public Iterable<Product> findAllProducts(String filter) {
+        if (filter != null && !filter.isEmpty()) {
+            return productRepository.findAllByTitleLikeIgnoreCase(filter);
+        } else {
+            return productRepository.findAll();
+        }
     }
 
     @Override
