@@ -2,7 +2,9 @@ package ru.nvgrig.catalogue.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -11,17 +13,20 @@ import ru.nvgrig.catalogue.controller.payload.NewProductPayload;
 import ru.nvgrig.catalogue.entity.Product;
 import ru.nvgrig.catalogue.service.ProductService;
 
+import java.security.Principal;
 import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("catalogue-api/products")
+@Slf4j
 public class ProductsRestController {
 
     private final ProductService productService;
 
     @GetMapping
-    public Iterable<Product> findProducts(@RequestParam(name = "filter", required = false) String filter) {
+    public Iterable<Product> findProducts(@RequestParam(name = "filter", required = false) String filter, Principal principal) {
+        log.info("Principal: {}", ((JwtAuthenticationToken) principal).getToken().getClaimAsString("email"));
         return productService.findAllProducts(filter);
     }
 

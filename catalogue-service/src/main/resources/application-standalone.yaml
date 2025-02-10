@@ -5,6 +5,10 @@ spring:
       password: password
       roles:
         - SERVICE
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8082/realms/store
   datasource:
     url: jdbc:postgresql://localhost:15432/catalogue
     username: catalogue
