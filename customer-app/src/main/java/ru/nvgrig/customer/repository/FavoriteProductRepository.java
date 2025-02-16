@@ -1,5 +1,6 @@
 package ru.nvgrig.customer.repository;
 
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.nvgrig.customer.entity.FavoriteProduct;
 
@@ -10,4 +11,6 @@ public interface FavoriteProductRepository {
     Mono<Void> deleteByProductId(int productId);
 
     Mono<FavoriteProduct> findByProductId(int productId);
+
+    Flux<FavoriteProduct> findFavoriteProducts();
 }
