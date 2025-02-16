@@ -14,6 +14,8 @@ import ru.nvgrig.customer.entity.Product;
 import ru.nvgrig.customer.service.FavoriteProductsService;
 import ru.nvgrig.customer.service.ProductReviewsService;
 
+import java.util.NoSuchElementException;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("customer/products/{productId:\\d+}")
@@ -25,7 +27,8 @@ public class ProductController {
 
     @ModelAttribute(name = "product", binding = false)
     public Mono<Product> loadProduct(@PathVariable("productId") int id) {
-        return productsClient.findProduct(id);
+        return productsClient.findProduct(id)
+                .switchIfEmpty(Mono.error(new NoSuchElementException("customer.products.error.not_found")));
     }
 
     @GetMapping
@@ -72,5 +75,11 @@ public class ProductController {
         }
         return productReviewsService.createProductReview(id, payload.rating(), payload.review())
                 .thenReturn("redirect:/customer/products/%d".formatted(id));
+    }
+
+    @ExceptionHandler(NoSuchElementException.class)
+    public String handleNoSuchElementException(NoSuchElementException exception, Model model) {
+        model.addAttribute("error", exception.getMessage());
+        return "errors/404";
     }
 }

@@ -2,6 +2,7 @@ package ru.nvgrig.customer.client;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.nvgrig.customer.entity.Product;
@@ -24,6 +25,7 @@ public class WebClientProductsClient implements ProductsClient {
         return webClient.get()
                 .uri("/catalogue-api/products/{productId}", id)
                 .retrieve()
-                .bodyToMono(Product.class);
+                .bodyToMono(Product.class)
+                .onErrorComplete(WebClientResponseException.NotFound.class);
     }
 }
