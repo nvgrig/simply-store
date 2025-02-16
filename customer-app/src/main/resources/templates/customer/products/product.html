@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>[[${product.title}]] &dash; Просто Магазин</title>
+</head>
+<body>
+<a data-th-href="@{/customer/products/list}">&larr; К списку товаров</a>
+<h1 data-th-text="${product.title}"></h1>
+<p data-th-text="${product.details}"></p>
+<form data-th-action="@{/customer/products/{productId}/add-to-favorites(productId=${product.id})}" method="post"
+      data-th-if="${!inFavorite}">
+    <button type="submit">Добавить в избранное</button>
+</form>
+<form data-th-action="@{/customer/products/{productId}/remove-from-favorites(productId=${product.id})}" method="post"
+      data-th-if="${inFavorite}">
+    <button type="submit">Удалить из избранное</button>
+</form>
+</body>
+</html>
