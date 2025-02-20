@@ -1,9 +1,9 @@
-package ru.nvgrig.customer.repository;
+package ru.nvgrig.feedback.repository;
 
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import ru.nvgrig.customer.entity.ProductReview;
+import ru.nvgrig.feedback.entity.ProductReview;
 
 import java.util.Collections;
 import java.util.LinkedList;

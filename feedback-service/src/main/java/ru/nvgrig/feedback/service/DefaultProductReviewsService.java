@@ -1,11 +1,11 @@
-package ru.nvgrig.customer.service;
+package ru.nvgrig.feedback.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import ru.nvgrig.customer.entity.ProductReview;
-import ru.nvgrig.customer.repository.ProductReviewRepository;
+import ru.nvgrig.feedback.entity.ProductReview;
+import ru.nvgrig.feedback.repository.ProductReviewRepository;
 
 import java.util.UUID;
 

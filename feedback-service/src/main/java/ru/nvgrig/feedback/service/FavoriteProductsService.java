@@ -1,11 +1,8 @@
-package ru.nvgrig.customer.service;
+package ru.nvgrig.feedback.service;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import ru.nvgrig.customer.entity.FavoriteProduct;
-import ru.nvgrig.customer.entity.Product;
-
-import java.util.List;
+import ru.nvgrig.feedback.entity.FavoriteProduct;
 
 public interface FavoriteProductsService {
 

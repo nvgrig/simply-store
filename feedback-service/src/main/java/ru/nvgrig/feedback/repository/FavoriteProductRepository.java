@@ -1,8 +1,8 @@
-package ru.nvgrig.customer.repository;
+package ru.nvgrig.feedback.repository;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import ru.nvgrig.customer.entity.FavoriteProduct;
+import ru.nvgrig.feedback.entity.FavoriteProduct;
 
 public interface FavoriteProductRepository {
 
