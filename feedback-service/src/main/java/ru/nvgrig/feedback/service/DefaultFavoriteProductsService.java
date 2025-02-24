@@ -32,6 +32,6 @@ public class DefaultFavoriteProductsService implements FavoriteProductsService {
 
     @Override
     public Flux<FavoriteProduct> findFavoriteProducts() {
-        return favoriteProductRepository.findFavoriteProducts();
+        return favoriteProductRepository.findAll();
     }
 }

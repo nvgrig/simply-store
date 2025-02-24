@@ -2,6 +2,9 @@ package ru.nvgrig.feedback.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -18,9 +21,13 @@ public class ProductReviewsRestController {
 
     private final ProductReviewsService productReviewsService;
 
+    private final ReactiveMongoTemplate reactiveMongoTemplate;
+
     @GetMapping("by-product-id/{productId}")
     public Flux<ProductReview> findProductReviewsByProductId(@PathVariable("productId") int productId) {
-        return productReviewsService.findProductReviewsByProduct(productId);
+        //return productReviewsService.findProductReviewsByProduct(productId);
+        return reactiveMongoTemplate
+                .find(Query.query(Criteria.where("productId").is(productId)), ProductReview.class);
     }
 
     @PostMapping

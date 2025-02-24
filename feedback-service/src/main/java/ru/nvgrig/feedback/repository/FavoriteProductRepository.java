@@ -1,16 +1,14 @@
 package ru.nvgrig.feedback.repository;
 
-import reactor.core.publisher.Flux;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import reactor.core.publisher.Mono;
 import ru.nvgrig.feedback.entity.FavoriteProduct;
 
-public interface FavoriteProductRepository {
+import java.util.UUID;
 
-    Mono<FavoriteProduct> save(FavoriteProduct favoriteProduct);
+public interface FavoriteProductRepository extends ReactiveCrudRepository<FavoriteProduct, UUID> {
 
     Mono<Void> deleteByProductId(int productId);
 
     Mono<FavoriteProduct> findByProductId(int productId);
-
-    Flux<FavoriteProduct> findFavoriteProducts();
 }
