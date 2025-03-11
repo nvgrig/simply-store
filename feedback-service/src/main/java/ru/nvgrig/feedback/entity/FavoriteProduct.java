@@ -13,9 +13,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @Document(value = "favorite_product")
 public class FavoriteProduct {
-
     @Id
     private UUID id;
-
     private int productId;
+    private String userId;
 }
