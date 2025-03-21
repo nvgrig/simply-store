@@ -60,7 +60,7 @@ class ProductsRestControllerTestIT {
                 .andDo(print())
                 .andExpectAll(
                         status().isCreated(),
-                        header().string(HttpHeaders.LOCATION, "http://localhost/catalogue-api/products/1"),
+                        header().string(HttpHeaders.LOCATION, "http://localhost:8080/catalogue-api/products/1"),
                         content().contentType(MediaType.APPLICATION_JSON),
                         content().json("""
                                   {
